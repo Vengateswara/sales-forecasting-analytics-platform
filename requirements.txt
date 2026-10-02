@@ -1,0 +1,159 @@
+# Core Python
+python-dotenv==1.0.0
+
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+aiofiles==23.2.1
+
+# Data Processing
+pandas==2.1.3
+numpy==1.26.0
+openpyxl==3.1.2
+xlrd==2.0.1
+xlwt==1.3.0
+pyarrow==14.0.1
+
+# Machine Learning
+scikit-learn==1.3.1
+xgboost==2.0.1
+lightgbm==4.0.0
+catboost==1.2.2
+imbalanced-learn==0.11.0
+
+# Visualization
+plotly==5.18.0
+matplotlib==3.8.2
+seaborn==0.13.0
+kaleido==0.2.1  # For static image export
+
+# Utilities
+joblib==1.3.2
+tqdm==4.66.1
+pydantic==2.5.0
+pydantic-settings==2.1.0
+jinja2==3.1.2
+markdown==3.5.1
+
+# PDF Generation
+reportlab==4.0.7
+weasyprint==60.1  # Alternative PDF generation
+
+# Excel Export
+xlsxwriter==3.1.9
+
+# Logging
+python-json-logger==2.0.7
+loguru==0.7.2
+
+# Database (Optional - for production)
+sqlalchemy==2.0.23
+alembic==1.12.1
+psycopg2-binary==2.9.9  # PostgreSQL
+pymongo==4.6.0  # MongoDB
+
+# Caching
+redis==5.0.1
+cachetools==5.3.2
+
+# Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Monitoring and Performance
+prometheus-client==0.19.0
+psutil==5.9.6
+memory-profiler==0.61.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+httpx==0.25.1  # For testing FastAPI endpoints
+pytest-xdist==3.5.0  # Parallel test execution
+
+# Code Quality
+black==23.11.0
+flake8==6.1.0
+pylint==3.0.2
+mypy==1.7.0
+isort==5.12.0
+
+# Development Tools
+jupyter==1.0.0
+ipython==8.17.2
+pre-commit==3.5.0
+
+# Additional ML Libraries
+shap==0.43.0  # SHAP values for model interpretability
+eli5==0.13.0  # Model explanation
+optuna==3.4.0  # Hyperparameter optimization
+hyperopt==0.2.7  # Alternative hyperparameter optimization
+
+# Time Series Specific
+pmdarima==2.0.4  # ARIMA models (optional)
+prophet==1.1.5  # Facebook Prophet (optional)
+statsmodels==0.14.0  # Statistical models
+
+# Data Quality
+great-expectations==0.18.3  # Data validation
+pandas-profiling==3.6.6  # Data profiling
+ydata-profiling==4.5.1  # Alternative profiling
+
+# File Handling
+python-magic==0.4.27  # File type detection
+pillow==10.1.0  # Image handling
+
+# Email Notifications (Optional)
+smtplib==0.0.1
+email-validator==2.1.0
+
+# Cloud Storage (Optional)
+boto3==1.33.0  # AWS S3
+google-cloud-storage==2.13.0  # GCS
+azure-storage-blob==12.19.0  # Azure
+
+# Task Queues (Optional)
+celery==5.3.4
+redis==5.0.1
+
+# API Documentation
+swagger-ui-bundle==1.1.0
+redoc==2.0.0
+
+# Environment Variables Management
+python-dotenv==1.0.0
+
+# Performance Optimization
+numba==0.58.1
+dask==2023.11.0
+
+# Validation
+pydantic[email]==2.5.0
+
+# Deployment
+gunicorn==21.2.0
+uvicorn[standard]==0.24.0
+nginx==1.24.0  # For Docker deployments
+
+# Monitoring
+sentry-sdk==1.38.0  # Error tracking
+newrelic==9.4.0  # Performance monitoring
+
+# Compression
+zstandard==0.22.0  # For faster data compression
+
+# Date/Time Handling
+python-dateutil==2.8.2
+pytz==2023.3
+tzdata==2023.3
+
+# Async Support
+anyio==4.0.0
+httpcore==1.0.2
+
+# Additional Utils
+wrapt==1.16.0
+packaging==23.2

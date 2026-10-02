@@ -1,0 +1,525 @@
+/* Enterprise-grade styling */
+:root {
+    --primary-color: #1a3a5c;
+    --secondary-color: #2c5a8c;
+    --accent-color: #4a90d9;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --dark-bg: #0a1a2b;
+    --light-bg: #f8f9fa;
+    --card-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    padding-top: 56px;
+}
+
+.main-content {
+    margin-left: 0;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+/* Navigation */
+.navbar {
+    background: linear-gradient(135deg, var(--dark-bg), var(--primary-color)) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background-color: white;
+    border-bottom: 2px solid var(--accent-color);
+    font-weight: 600;
+    padding: 15px 20px;
+}
+
+/* KPI Cards */
+.kpi-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.kpi-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Loading Screen */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-content {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+/* Charts */
+.chart-container {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+/* Tables */
+.table-container {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    overflow-x: auto;
+    box-shadow: var(--card-shadow);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(74, 144, 217, 0.05);
+}
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: 4px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-outline-primary:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Sidebar */
+.offcanvas {
+    background: linear-gradient(180deg, var(--dark-bg), var(--primary-color)) !important;
+    width: 280px;
+}
+
+.list-group-item {
+    border: none;
+    margin-bottom: 2px;
+    border-radius: 8px !important;
+    transition: all 0.3s;
+}
+
+.list-group-item:hover {
+    background: rgba(74, 144, 217, 0.2) !important;
+    padding-left: 25px;
+}
+
+.list-group-item.active {
+    background: var(--accent-color) !important;
+}
+
+/* Section Content */
+.section-content {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .kpi-value {
+        font-size: 1.5rem;
+    }
+    
+    .main-content {
+        padding: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Status Badges */
+.badge-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge-warning {
+    background-color: var(--warning-color);
+    color: #212529;
+}
+
+.badge-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Utility Classes */
+.text-primary-custom {
+    color: var(--primary-color);
+}
+
+.bg-primary-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+/* ============================================================ */
+/* ===== DATASET PREVIEW TABLE STYLES ===== */
+/* ============================================================ */
+
+#datasetPreview .card {
+    border: 1px solid #e9ecef;
+}
+
+#datasetPreview .card-header {
+    background-color: #ffffff;
+    border-bottom: 2px solid #4a90d9;
+}
+
+#datasetPreview .card-header h6 {
+    color: #1a3a5c;
+    font-weight: 600;
+}
+
+#datasetPreview .card-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Table styling */
+#datasetTable {
+    font-size: 0.9rem;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#datasetTable thead th {
+    background-color: #f8f9fa !important;
+    color: #1a3a5c !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #4a90d9 !important;
+    white-space: nowrap;
+    padding: 10px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#datasetTable thead th i {
+    color: #6c757d;
+    font-size: 0.7rem;
+}
+
+#datasetTable thead th:hover {
+    background-color: #e9ecef !important;
+}
+
+#datasetTable tbody td {
+    color: #212529 !important;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#datasetTable tbody tr:hover {
+    background-color: rgba(74, 144, 217, 0.05);
+}
+
+#datasetTable tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+#datasetTable tbody tr:nth-child(even):hover {
+    background-color: rgba(74, 144, 217, 0.08);
+}
+
+/* Table controls */
+#datasetPreview .form-control-sm,
+#datasetPreview .form-select-sm {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    font-size: 0.85rem;
+}
+
+#datasetPreview .form-control-sm:focus,
+#datasetPreview .form-select-sm:focus {
+    border-color: #4a90d9;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 217, 0.25);
+}
+
+/* Table info */
+#tableInfo {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+#pageInfo {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+/* Table scrollbar */
+#datasetPreview .table-responsive {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#datasetPreview .table-responsive::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#datasetPreview .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#datasetPreview .table-responsive::-webkit-scrollbar-thumb {
+    background: #c1c7cd;
+    border-radius: 3px;
+}
+
+#datasetPreview .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #a0a7ae;
+}
+
+/* Pagination buttons */
+#datasetPreview .btn-outline-primary {
+    border-color: #4a90d9;
+    color: #4a90d9;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+}
+
+#datasetPreview .btn-outline-primary:hover {
+    background-color: #4a90d9;
+    color: white;
+}
+
+/* Sticky header fix for table */
+#tableHeader th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa !important;
+    color: #1a3a5c !important;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+/* Table row count badge */
+#datasetPreview .badge-secondary {
+    background-color: #6c757d;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
+/* Clear button in header */
+#datasetPreview .btn-outline-secondary {
+    border-color: #ced4da;
+    color: #6c757d;
+}
+
+#datasetPreview .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Search input placeholder */
+#tableSearchInput::placeholder {
+    color: #adb5bd;
+    font-size: 0.85rem;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 768px) {
+    #datasetTable {
+        font-size: 0.8rem;
+    }
+    
+    #datasetTable thead th,
+    #datasetTable tbody td {
+        padding: 6px 8px;
+    }
+    
+    #datasetPreview .card-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    #datasetPreview .card-header .d-flex {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+}
+
+/* ============================================================ */
+/* ===== BADGE COLORS ===== */
+/* ============================================================ */
+
+/* Purple badge for seasonality features */
+.bg-purple {
+    background-color: #6f42c1 !important;
+    color: white !important;
+}
+
+/* Orange badge for additional categories if needed */
+.bg-orange {
+    background-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* Teal badge for additional categories if needed */
+.bg-teal {
+    background-color: #20c997 !important;
+    color: white !important;
+}
+
+/* Pink badge for additional categories if needed */
+.bg-pink {
+    background-color: #e83e8c !important;
+    color: white !important;
+}
+
+/* ============================================================ */
+/* ===== SCHEMA TABLE STYLES ===== */
+/* ============================================================ */
+
+/* Schema table styling */
+#datasetPreview .table td code {
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #1a3a5c;
+}
+
+#datasetPreview .table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Sticky header for schema table */
+#datasetPreview .table thead th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa !important;
+    color: #1a3a5c !important;
+    z-index: 10;
+    border-bottom: 2px solid #4a90d9 !important;
+}
+
+/* Progress bar inside card */
+#datasetPreview .progress {
+    height: 20px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+#datasetPreview .progress-bar {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* KPI cards in schema summary */
+#datasetPreview .kpi-card {
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+#datasetPreview .kpi-card .kpi-value {
+    font-size: 1.2rem;
+}
+
+#datasetPreview .kpi-card .kpi-label {
+    font-size: 0.7rem;
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Forecasting Analytics Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/frontend/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.26.0/plotly.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand ms-auto" href="#">
+                <i class="fas fa-chart-line me-2"></i>
+                Sales Forecasting Platform
+            </a>
+        </div>
+    </nav>
+    <!-- Sidebar -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="list-group">
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('upload')">
+                    <i class="fas fa-upload me-2"></i>Upload Data
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('quality')">
+                    <i class="fas fa-check-circle me-2"></i>Data Quality
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('preprocess')">
+                    <i class="fas fa-cogs me-2"></i>Preprocess
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('features')">
+                    <i class="fas fa-cubes me-2"></i>Feature Engineering
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('eda')">
+                    <i class="fas fa-chart-pie me-2"></i>EDA
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('train')">
+                    <i class="fas fa-robot me-2"></i>Train & Evaluate Models
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('compare')">
+                    <i class="fas fa-table me-2"></i>Compare Models
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('forecast')">
+                    <i class="fas fa-arrow-right me-2"></i>Forecast
+                </button>
+                <button class="list-group-item list-group-item-action bg-dark text-white border-0"
+                    onclick="showSection('downloads')">
+                    <i class="fas fa-download me-2"></i>Downloads
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid mt-5 pt-3">
+            <!-- Loading Screen -->
+            <div id="loadingScreen" class="loading-overlay" style="display: none;">
+                <div class="loading-content">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h5 id="loadingMessage" class="mt-3">Processing...</h5>
+                    <div class="progress mt-3" style="width: 300px;">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: UPLOAD ===== -->
+            <div id="uploadSection" class="section-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2><i class="fas fa-upload me-2"></i>Upload Dataset</h2>
+
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="fileInput" class="form-label">Choose Dataset</label>
+                                <input type="file" class="form-control" id="fileInput" accept=".csv,.xlsx,.xls,.json">
+                                <div class="form-text">Supported formats: CSV, Excel, JSON (Max size: 100MB)</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-upload me-2"></i>Upload
+                            </button>
+                            <button type="button" class="btn btn-secondary ms-2" onclick="clearAllData()">
+                                <i class="fas fa-eraser me-2"></i>Clear All
+                            </button>
+                        </form>
+                        <div id="uploadStatus" class="mt-3"></div>
+                    </div>
+                </div>
+
+                <!-- Dataset Info -->
+                <div id="datasetInfo" class="card mt-3" style="display: none;">
+                    <div class="card-header">
+                        <h5>Dataset Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="datasetDetails" class="row"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: DATA QUALITY ===== -->
+            <div id="qualitySection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-check-circle me-2"></i>Data Quality Report</h2>
+                <div id="qualityReport"></div>
+            </div>
+
+            <!-- ===== SECTION: PREPROCESS ===== -->
+            <div id="preprocessSection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-cogs me-2"></i>Data Preprocessing</h2>
+                <button class="btn btn-primary" onclick="preprocessData()">
+                    <i class="fas fa-play me-2"></i>Run Preprocessing
+                </button>
+                <div id="preprocessResults" class="mt-3"></div>
+            </div>
+
+            <!-- ===== SECTION: FEATURE ENGINEERING ===== -->
+            <div id="featuresSection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-cubes me-2"></i>Feature Engineering</h2>
+                <button class="btn btn-primary" onclick="engineerFeatures()">
+                    <i class="fas fa-play me-2"></i>Engineer Features
+                </button>
+                <div id="featureResults" class="mt-3"></div>
+
+                <!-- Dataset Preview -->
+                <div id="datasetPreview" class="mt-4" style="display: none;">
+                    <div class="card">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0"><i class="fas fa-table me-2"></i>Dataset Schema Information</h6>
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-sm btn-outline-success" onclick="downloadDataset()">
+                                    <i class="fas fa-download me-1"></i>Download CSV
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="datasetSchemaContainer">
+                            <!-- Content will be rendered by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: EDA ===== -->
+            <div id="edaSection" class="section-content" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2><i class="fas fa-chart-pie me-2"></i>Exploratory Data Analysis</h2>
+                    <div>
+                        <button class="btn btn-primary btn-sm" onclick="loadEDACharts()">
+                            <i class="fas fa-chart-pie me-1"></i>Generate EDA
+                        </button>
+                    </div>
+                </div>
+                <div id="edaCharts">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Click <strong>"Generate EDA"</strong> to explore your data. Make sure you have completed
+                        <strong>Feature Engineering</strong> first.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: TRAIN & EVALUATE (Combined) ===== -->
+            <!-- ===== SECTION: TRAIN & EVALUATE (Combined) ===== -->
+            <div id="trainSection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-robot me-2"></i>Train & Evaluate Models</h2>
+
+                <!-- Training Controls -->
+                <div class="mb-3">
+                    <button class="btn btn-primary" onclick="trainModels()">
+                        <i class="fas fa-play me-2"></i>Train All Models
+                    </button>
+                    <span class="text-muted ms-2" style="font-size: 0.9rem;">
+                        <i class="fas fa-info-circle me-1"></i>
+                        This may take 2-5 minutes depending on dataset size
+                    </span>
+                </div>
+
+                <!-- Training Results (Summary) -->
+                <div id="trainingResults" class="mt-3"></div>
+
+                <!-- Evaluation Results (Detailed Metrics - shows after training) -->
+                <div id="evaluationResults" class="mt-4" style="display: none;"></div>
+            </div>
+
+            <!-- ===== SECTION: COMPARE ===== -->
+            <div id="compareSection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-table me-2"></i>Model Comparison</h2>
+                <div id="comparisonResults"></div>
+            </div>
+
+            <!-- ===== SECTION: FORECAST ===== -->
+            <div id="forecastSection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-arrow-right me-2"></i>Sales Forecast</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="forecastPeriod" class="form-label">Forecast Period</label>
+                            <select id="forecastPeriod" class="form-select">
+                                <option value="7">Next 7 Days</option>
+                                <option value="30" selected>Next 30 Days</option>
+                                <option value="90">Next 90 Days</option>
+                                <option value="180">Next 180 Days</option>
+                                <option value="365">Next 365 Days</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateForecast()">
+                            <i class="fas fa-arrow-right me-2"></i>Generate Forecast
+                        </button>
+                    </div>
+                    <div class="col-md-8">
+                        <div id="forecastResults"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: DOWNLOADS ===== -->
+            <div id="downloadsSection" class="section-content" style="display: none;">
+                <h2><i class="fas fa-download me-2"></i>Download Center</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-primary w-100 mb-2" onclick="downloadFile('cleaned_data')">
+                            <i class="fas fa-file-csv me-2"></i>Cleaned Data (CSV)
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-primary w-100 mb-2" onclick="downloadFile('forecast')">
+                            <i class="fas fa-file-excel me-2"></i>Forecast (Excel)
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-primary w-100 mb-2" onclick="downloadFile('model_report')">
+                            <i class="fas fa-file-pdf me-2"></i>Model Report (PDF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/frontend/js/app.js"></script>
+    <script src="/frontend/js/dashboard.js"></script>
+    <script src="/frontend/js/charts.js"></script>
+</body>
+
+</html>

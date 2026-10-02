@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# CatBoost generated files
+catboost_info/
+
+# Trained models
+saved_models/
+*.pkl
+*.joblib
+
+# Uploaded datasets
+uploads/
+*.csv
+*.xlsx
+*.xls
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
